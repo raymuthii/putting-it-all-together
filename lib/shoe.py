@@ -1,7 +1,6 @@
 class Shoe:
-    def __init__(self, brand, style, size, price):
+    def __init__(self, brand, size, price=0.0):
         self.brand = brand
-        self.style = style
         self.size = size
         self.price = price
 
@@ -16,23 +15,15 @@ class Shoe:
         self._brand = value
 
     @property
-    def style(self):
-        return self._style
-
-    @style.setter
-    def style(self, value):
-        if not isinstance(value, str):
-            raise ValueError("Style must be a string")
-        self._style = value
-
-    @property
     def size(self):
         return self._size
 
     @size.setter
     def size(self, value):
-        if not isinstance(value, (int, float)) or value < 0:
-            raise ValueError("Size must be a non-negative number")
+        if not isinstance(value, int):
+            raise ValueError("Size must be an integer")
+        if value <= 0:
+            raise ValueError("Size must be a positive number")
         self._size = value
 
     @property
@@ -46,4 +37,4 @@ class Shoe:
         self._price = value
 
     def __str__(self):
-        return f"Shoe: {self.brand} {self.style}, size {self.size}, ${self.price:.2f}"
+        return f"Shoe: {self.brand}, Size: {self.size}, Price: ${self.price:.2f}"
